@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -13,7 +15,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.sco.testrunner.HiltTestRunner"
     }
 
     buildTypes {
@@ -46,6 +49,12 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+    // Dagger & Hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.44'
+
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
@@ -58,5 +67,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
+    // Note that espresso-idling-resource is used in the code under test.
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
 
+
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
 }

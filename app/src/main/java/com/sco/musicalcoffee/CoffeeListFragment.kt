@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sco.musicalcoffee.databinding.LayoutCoffeeListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CoffeeListFragment : Fragment() {
 
     companion object {

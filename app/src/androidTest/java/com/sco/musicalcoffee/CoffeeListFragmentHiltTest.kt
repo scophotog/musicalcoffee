@@ -6,16 +6,32 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.sco.di.FakeRepository
+import com.sco.musicalcoffee.di.RepositoryModule
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
+import dagger.hilt.components.SingletonComponent
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import javax.inject.Singleton
 
-@RunWith(AndroidJUnit4::class)
+@UninstallModules(RepositoryModule::class)
 @HiltAndroidTest
-class CoffeeListFragmentTest {
+class CoffeeListFragmentHiltTest {
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    abstract class TestModule {
+        @Singleton
+        @Binds
+        abstract fun bindFakeRepository(
+            fakeRepository: FakeRepository
+        ): ICoffeeRepository
+    }
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
