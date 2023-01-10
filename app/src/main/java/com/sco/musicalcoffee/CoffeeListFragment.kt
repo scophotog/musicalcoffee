@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sco.musicalcoffee.databinding.LayoutCoffeeListBinding
@@ -80,13 +82,13 @@ class CoffeeListFragment : Fragment() {
     }
 
     private fun onItemClick(coffee: Coffee) {
-        val fragment = CoffeeDetailFragment().apply {
-            arguments = Bundle().apply {
-                putString("coffee", coffee.drinkName)
-                putInt("image", coffee.image)
-            }
-        }
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment).addToBackStack(null).commit()
+        val directions = CoffeeListFragmentDirections.actionCoffeeListFragmentToCoffeeDetailFragment(coffee.drinkName ,coffee.image)
+        val options = NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in)
+            .setExitAnim(R.anim.slide_out)
+            .setPopEnterAnim(R.anim.slide_in)
+            .setPopExitAnim(R.anim.fade_out)
+            .build()
+        findNavController().navigate(directions, options)
     }
 }

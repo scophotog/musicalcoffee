@@ -11,7 +11,7 @@ interface ICoffeeRepository {
 class CoffeeRepository @Inject constructor() : ICoffeeRepository {
 
     companion object {
-        var shouldRandomError = true
+        var shouldRandomError = false
     }
 
     /**
@@ -19,7 +19,7 @@ class CoffeeRepository @Inject constructor() : ICoffeeRepository {
      */
     override suspend fun getCoffee(): List<Coffee> {
         // Simulate Network Delay
-        val shouldLoadImmediately = System.currentTimeMillis() % 2L == 0L
+        val shouldLoadImmediately = true //System.currentTimeMillis() % 2L == 0L
         val randomDelay = (if (shouldLoadImmediately) 0 else (0..3).random()).seconds
         delay(randomDelay)
         // Simulate Network Error

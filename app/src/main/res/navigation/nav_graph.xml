@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/coffeeListFragment">
+
+    <fragment
+        android:id="@+id/coffeeListFragment"
+        android:name="com.sco.musicalcoffee.CoffeeListFragment"
+        android:label="CoffeeListFragment" >
+        <action
+            android:id="@+id/action_coffeeListFragment_to_coffeeDetailFragment"
+            app:destination="@id/coffeeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coffeeDetailFragment"
+        android:name="com.sco.musicalcoffee.CoffeeDetailFragment"
+        android:label="CoffeeDetailFragment">
+        <argument
+            android:name="coffee"
+            app:argType="string"/>
+        <argument
+            android:name="image"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_coffeeDetailFragment_to_coffeeDialog"
+            app:destination="@id/coffeeDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/coffeeDialog"
+        android:name="com.sco.musicalcoffee.CoffeeDialog"
+        android:label="CoffeeDialog" />
+</navigation>
