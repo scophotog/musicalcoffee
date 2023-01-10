@@ -1,6 +1,5 @@
 package com.sco.musicalcoffee
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +20,11 @@ class CoffeeDialog: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        /*
+        Dialog animations aren't controlled by navigation
+        You must create a style for the dialog and apply it.
+        Default android theme/style fades in and out dialogs
+         */
         dialog.window?.attributes?.windowAnimations = R.style.UpDownDialog
         return dialog
     }
